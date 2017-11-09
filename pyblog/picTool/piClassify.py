@@ -131,9 +131,8 @@ class imageClassify(object):
              newName = str(random.randint(1,100))+baseName
              newAbsPath = picAbsPath.replace(baseName, newName)
              #os.rename(picAbsPath, newAbsPath)
-             shutil.copyfile(picAbsPath,'d:/picClassity/dupli/'+newName)
+             shutil.copyfile(picAbsPath,self.bakPath+'/'+newName)
              print('copyfile:',picAbsPath,newName)
-             #shutil.move(newAbsPath, 'd:/picClassity/dupli')
         return
 
 
