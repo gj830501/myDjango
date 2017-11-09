@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  
+<head>
+    <meta charset="utf-8">
+    <title>Login - LifeStyle</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+     {% load staticfiles %}
+
+    <link href="{% static 'frtp/css/bootstrap.min.css'%}" rel="stylesheet">
+<link href="{% static 'frtp/css/bootstrap-responsive.min.css'%}" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
+        rel="stylesheet">
+<link href="{% static 'frtp/css/font-awesome.css'%}" rel="stylesheet">
+<link href="{% static 'frtp/css/style.css'%}" rel="stylesheet">
+<link href="{% static 'frtp/css/pages/dashboard.css'%}" rel="stylesheet">
+
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	
+	<div class="navbar navbar-fixed-top">
+	
+	<div class="navbar-inner">
+		
+		<div class="container">
+			
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			
+			<a class="brand" href="index.html">
+				Welcome to LifeStyle
+			</a>		
+			
+			<div class="nav-collapse">
+				<ul class="nav pull-right">
+					
+					<li class="">						
+						<a href="/signup/" class="">
+                            <i>你好！ </i>{{ request.user }}
+						</a>
+						
+					</li>
+					
+					<li class="">						
+						<a href="/index/" class="">
+							<i class="icon-chevron-left"></i>
+							Back to Homepage
+						</a>
+						
+					</li>
+				</ul>
+				
+			</div><!--/.nav-collapse -->	
+	
+		</div> <!-- /container -->
+		
+	</div> <!-- /navbar-inner -->
+	
+</div> <!-- /navbar -->
+
+     <!-- /widget -->
+          <div class="widget widget-nopad">
+            <div class="widget-header"> <i class="icon-list-alt"></i>
+              <h3> Your Articles</h3>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+              <ul class="news-items">
+                  {% for article in userArticles %}
+
+                  <li>
+                  <div class="news-item-date"> <span class="news-item-day"></span>{{ article.add_time|date:" j"   }} <span class="news-item-month">{{ article.add_time|date:"F "   }}</span> </div>
+                  <div class="news-item-detail"> <a href="#" class="news-item-title" target="_blank"> {{ article.articleName  | truncatewords:"10"   }}</a>
+                    <p class="news-item-preview"> {{ article.articleContext | truncatewords:"50"  }} </p>
+                  </div>
+                  <div class="options_arrow">
+                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
+                          <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
+
+                              <li>
+                                {% comment %}  <a href="javascript:" role="button"  id="{{article.id  }}" class=" icon-edit icon-large" data-toggle="modal" >Edit</a>{% endcomment %}
+                                  <button class="icon-edit "  id="{{article.id  }}" data-toggle="modal"  onclick="artiEdie(this)" value="">Edit</button>
+													 <!-- Button to trigger modal -->
+                                                  {% comment %}  <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>{% endcomment %}
+
+
+
+                            </li>
+
+                            <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
+                            <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
+
+                          </ul>
+                        </div>
+                      </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <!-- /widget-content -->
+          </div>
+          <!-- /widget -->
+    <!-- Modal -->
+                                                    <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                      <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  onclick="artiEdieClose()">×</button>
+                                                        <h3 id="myModalLabel">Thank you for visiting by EGrappler</h3>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                       {% comment %}form {% endcomment %}
+                                                          <form action="/updateArticel/" method="post">
+		    {% csrf_token %}
+
+
+			<div class="login-fields">
+
+                <div class="field">
+					<label for="articleId">articleId:</label>
+					<input type="text" id="articleId" name="articleId" value="" placeholder="" class="" />
+
+				</div> <!-- /field -->
+
+
+				<div class="field">
+					<label for="articleName">articleNamee:</label>
+					<input type="text" id="articleName" name="articleName" value="" placeholder="" class="" />
+
+				</div> <!-- /field -->
+
+				<div class="field">
+					<label for="articleContext">articleContext:</label>
+					{% comment %}<input type="text" id="articleContext" name="articleContext" value="" placeholder="" class="" />{% endcomment %}
+                    <textarea id="articleContext" name="articleContext"   class="col-sm-8" ></textarea>
+                </div> <!-- /field -->
+
+
+			</div> <!-- /login-fields -->
+
+			<div class="login-actions">
+
+
+
+				<button class="button btn btn-primary btn-large">Save</button>
+
+			</div> <!-- .actions -->
+
+		</form>
+                                                          {% comment %}----form{% endcomment %}
+                                                      </div>
+
+                                                    </div>
+
+
+<script src="{% static 'frtp/js/jquery-1.7.2.min.js'%}"></script>
+<script src="{% static 'frtp/js/bootstrap.js'%}"></script>
+
+<script src="{% static 'frtp/js/signin.js'%}"></script>
+
+
+<script src="{% static 'frtp/js/excanvas.min.js'%}"></script>
+
+<script>
+    function artiEdie(obj) {
+    var id = obj.id;
+    $.ajax({
+          type: 'POST',
+          url: '/userArticleContent/',
+          async: false,
+          dataType:"json",
+          data: {"id":id},
+          success: function (result) {
+             // res = JSON.stringify(result);
+               $("#articleId").val(id);
+               $("#articleName").val(result[0]['fields']['articleName']);
+                 $("#articleContext").val(result[0]['fields']['articleContext']);
+
+                $("#myModal").attr("class","modal");
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                        alert('提交失败：'+textStatus);
+                    },
+        });
+
+
+
+
+    }
+    function artiEdieClose() {
+
+
+              $("#myModal").attr("class","modal hide fade");
+
+
+    }
+</script>
+
+
+</body>
+
+</html>
