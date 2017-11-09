@@ -122,7 +122,7 @@ class imageClassify(object):
         os.chdir(secfoldName)
 
         print(os.path.abspath('.'),'==',picAbsPath)
-        #shutil.move(picAbsPath, random.randint(1,9999999999))
+
         #判断文件名是否重复
         try:
             shutil.move(picAbsPath, '.')
