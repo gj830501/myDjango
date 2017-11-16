@@ -19,6 +19,7 @@ from pyblog import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
+from ailb import aviews
 
 #web后台用户名密码：gujun/gujunfox
 urlpatterns = [
@@ -36,6 +37,9 @@ urlpatterns = [
     url(r'^logout/', views.logout),
     url(r'^userArticleContent/', views.userArticleContent),
     url(r'^updateArticel/', views.updateArticel),
+    ####   以下是AILB 项目URL配置信息  ###
+    url(r'^test/', aviews.test),
+     url(r'^ailb/', aviews.index),
 
 ]
 handler404 = TemplateView.as_view(template_name='error.html')
