@@ -35,7 +35,7 @@ class Article(models.Model):
     articleName=models.CharField(max_length=30,verbose_name=u'文章标题')
     articleContext=models.TextField(verbose_name=u'文章内容')
     add_time=models.DateTimeField(default=datetime.now)
-    image=models.ImageField(max_length=100,upload_to=u'article/%Y/%m',default=u'static/article/default.png' ,
+    image=models.ImageField(max_length=100,upload_to=u'static/article/%Y/%m',default=u'static/article/default.png' ,
                             verbose_name=u'文章图片')
 
     class Meta:
