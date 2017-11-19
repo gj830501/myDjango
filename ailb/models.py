@@ -27,7 +27,7 @@ class replyEssay(models.Model):
     #文章外键
     techEssay = models.ForeignKey(TechEssay)
     replyDetail = models.CharField(max_length=1000,verbose_name=u'回复内容')
-    replyDate = models.DateTimeField(default=datetime.now,verbose_name=u'回复日期')
+    replyDate = models.DateTimeField(default=datetime.now(),verbose_name=u'回复日期')
     class Meta:
         verbose_name=u'文章回复信息表'
         verbose_name_plural=verbose_name
@@ -35,6 +35,8 @@ class replyEssay(models.Model):
 
     def __str__(self):
         return self.replyDetail
+
+
 
 #歌曲目录
 class favorMusic(models.Model):

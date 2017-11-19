@@ -11,6 +11,8 @@ from urllib.request import urlopen
 import os
 import re
 import random
+import chardet
+import zlib
 
 class novelSpider:
     jsList = []
@@ -23,20 +25,30 @@ class novelSpider:
 
     def catchPageContent(self):
         htmla = urllib.request.urlopen(self.url)
-        htmcont = htmla.read().decode('utf-8')
+        htmconta = htmla.read().decode('utf-8')
+        file = open('G:/gujun/a/aa.txt','w')
+        file.write(htmconta)
+        file.close()
+        file1 = open('G:/gujun/a/aa.txt','r')
+
+        print(chardet.detect(file1.read()))
+        file1.close()
+        print("========================")
+        htmcont =htmconta.decode('utf8')
+        print(htmcont)
         soup = BeautifulSoup(htmcont)
         keycont = soup.prettify()
        # print(keycont)
-        jsurl = soup.findAll('script')
-        print(jsurl[0])
+        #jsurl = soup.findAll('script')
+        #print(jsurl[0])
         #首面就两直接提取不用分析
         #if self.downJs('js/require/require.js'):
-        self.downJs('js/main.js?v=1510123324000')
+        #self.downJs('js/main.js?v=1510123324000')
         #else:
         #    print('执行失败')
 
 
-
+    @staticmethod
     def getContent(url):
         """
         此函数用于模拟浏览器访问的网页
@@ -50,19 +62,18 @@ class novelSpider:
         也可以直接将个字典传入，字典中就是下面元组的键值对应 
         """
         req = urllib.request.Request(url)
-        req.add_header('Accept', '*/*')
+        req.add_header('Accept', 'text/javascript, text/html, application/xml, text/xml, */*')
 
         req.add_header('Accept-Encoding', 'gzip')
         req.add_header("Accept-Languaget", 'zh-CN')
         req.add_header('Connection', 'keep-alive')
-        # req.add_header('Cookie','pgv_pvi=2839000064; tencentSig=2593114112; Hm_lvt_407473d433e871de861cf818aa1405a1=1501052956;'
-        #                        ' Hm_lvt_3c8ecbfa472e76b0340d7a701a04197e=1507799775; Hm_lvt_2553f5293490d305415179e25bb3450e=1509009897;'
-        #                        ' _qddaz=QD.onyqil.rwaicb.j2pv6wko')
+        req.add_header('Cookie','tt_webid=6490058021534975501; uuid="w:2ab0c434e740430cb730692b57cf4c6b"; UM_distinctid=15fd3a7972337c-0a41b4de85bfc8-1c1f7d54-100200-15fd3a79724337; __tasessionId=r6d8e2t9k1511091592686; CNZZDATA1259612802=2107586991-1511081791-%7C1511087191')
         req.add_header("User-Agent", random_header)
         req.add_header("GET", url)
-        req.add_header("Host", "www.jklife.com")
-        req.add_header("Referer", "http://www.jklife.com/")
+        req.add_header("Host", "www.toutiao.com")
+        req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
         print('====', req.headers)
+
         content = urlopen(req).read().decode("utf-8")
         print(content)
 
@@ -122,8 +133,8 @@ class novelSpider:
 
 
 if __name__=='__main__':
-    ns = novelSpider('http://www.jklife.com/')
-    ns.catchPageContent()
-    #getContent('http://www.jklife.com/views/newsC/newsD.html?v=1510123324000')
+    #ns = novelSpider()
+    #ns.catchPageContent()
+    novelSpider.getContent('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
 
 

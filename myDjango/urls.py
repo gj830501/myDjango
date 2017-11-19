@@ -39,7 +39,11 @@ urlpatterns = [
     url(r'^updateArticel/', views.updateArticel),
     ####   以下是AILB 项目URL配置信息  ###
     url(r'^test/', aviews.test),
-     url(r'^ailb/', aviews.index),
+    url(r'^ailb/index', aviews.index),
+    url(r'^ailb/essayFavor/', aviews.essayFavor),
+    url(r'^ailb/detail/id(\d+)/$', aviews.detail),
+    url(r'^ailb/replySubmit/', aviews.replySubmit),
+
 
 ]
 handler404 = TemplateView.as_view(template_name='error.html')

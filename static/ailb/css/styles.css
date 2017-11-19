@@ -49,7 +49,7 @@ header nav ul li a:hover, #nav_current { color: #fff; background: rgba(20, 20, 2
 .arrow_box h2.title { padding: 0 0 0 20px; font: 16px/50px "Î¢ÈíÑÅºÚ", "Microsoft YaHei", Arial, Helvetica, sans-serif }
 .arrow_box h2 a:hover { padding-left: 20px }
 .textinfo { overflow: hidden; }
-.arrow_box img { width: 150px; padding: 4px; float: left; -webkit-transition: All 1s ease; -moz-transition: All 1s ease; -ms-transition: All 1s ease; -o-transition: All 1s ease; border-radius: 4px; margin: 0 20px 20px; }
+.arrow_box img { width: 150px;height: 150px; padding: 4px; float: left; -webkit-transition: All 1s ease; -moz-transition: All 1s ease; -ms-transition: All 1s ease; -o-transition: All 1s ease; border-radius: 4px; margin: 0 20px 20px; }
 .arrow_box img:hover { opacity: 0.6; }
 .arrow_box p { line-height: 24px; padding: 0 20px 20px }
 .arrow_box p:hover { text-shadow: 1px 1px 1px #000; }
@@ -125,3 +125,11 @@ footer { background: rgba(0, 0, 0, 0.44); -webkit-box-shadow: 0 -1px 0 rgba(0,0,
 .flickr ul li img:hover { opacity: 0.2 }
 .footer-bottom { background: rgba(0, 0, 0, 0.55); overflow: hidden; }
 .footer-bottom p { width: 1000px; margin: 0 auto; padding: 10px 0; }
+/* ÎÄÕÂ»Ø¸´ */
+.reply { width: 98%; float: left }
+.reply dl { display: block; overflow: hidden; margin-bottom: 12px }
+.reply dd { line-height: 22px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden }
+.reply dd:last-child { color: #6A9150; }
+.reply time { color: #066; margin-left: 10px }
+.reply dt { float: left; }
+.reply dt img { width: 67px; height: 67px; margin-right: 10px; }
