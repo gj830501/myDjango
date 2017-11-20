@@ -13,6 +13,7 @@ import re
 import random
 import chardet
 import zlib
+import json
 
 class novelSpider:
     jsList = []
@@ -25,27 +26,15 @@ class novelSpider:
 
     def catchPageContent(self):
         htmla = urllib.request.urlopen(self.url)
-        htmconta = htmla.read().decode('utf-8')
-        file = open('G:/gujun/a/aa.txt','w')
-        file.write(htmconta)
-        file.close()
-        file1 = open('G:/gujun/a/aa.txt','r')
-
-        print(chardet.detect(file1.read()))
-        file1.close()
+        htmcont = htmla.read().decode('utf-8')
         print("========================")
-        htmcont =htmconta.decode('utf8')
         print(htmcont)
-        soup = BeautifulSoup(htmcont)
-        keycont = soup.prettify()
-       # print(keycont)
-        #jsurl = soup.findAll('script')
-        #print(jsurl[0])
-        #首面就两直接提取不用分析
-        #if self.downJs('js/require/require.js'):
-        #self.downJs('js/main.js?v=1510123324000')
-        #else:
-        #    print('执行失败')
+        data = json.loads(htmcont)
+        newsList = data['data']
+        for news in newsList:
+            print(news)
+
+
 
 
     @staticmethod
@@ -74,7 +63,7 @@ class novelSpider:
         req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
         print('====', req.headers)
 
-        content = urlopen(req).read().decode("utf-8")
+        content = urlopen(req).read()
         print(content)
 
     #查找JS源文件内容
@@ -133,8 +122,9 @@ class novelSpider:
 
 
 if __name__=='__main__':
-    #ns = novelSpider()
-    #ns.catchPageContent()
-    novelSpider.getContent('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
+    ns = novelSpider('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source='
+                     'toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
+    ns.catchPageContent()
+    #novelSpider.getContent('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
 
 
