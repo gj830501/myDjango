@@ -48,6 +48,7 @@ def getContent(url):
     return newsList
 
 
+
 def getToutiaoNews():
     url = "https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=%s&cp=%s"
     #作为参数，实现刷新新闻内容
