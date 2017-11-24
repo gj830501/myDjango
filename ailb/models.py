@@ -53,3 +53,18 @@ class favorMusic(models.Model):
 
     def __str__(self):
         return self.musicName
+
+#条头新闻内容，爬取少量
+class toutiaoNews(models.Model):
+    title =  models.CharField(max_length=30,verbose_name=u'新闻标题')
+    chineseTag = models.CharField(max_length=30,verbose_name=u'新闻频道')
+    groupUrd = models.CharField(max_length=30,verbose_name=u'新闻链接')
+    imageUrl  = models.CharField(max_length=100,verbose_name=u'新闻图标')
+    source = models.CharField(max_length=30,verbose_name=u'新闻来源')
+    class Meta:
+        verbose_name = u'新闻信息'
+        verbose_name_plural = verbose_name
+        db_table = 'tb_news'
+
+    def __str__(self):
+        return self.title

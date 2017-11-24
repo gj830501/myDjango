@@ -79,7 +79,7 @@ aside div { box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba
 .toppic li img { width: 80px; float: left; margin-right: 10px; }
 .toppic ul li:nth-child(2) { margin: 15px 0; }
 .toppic ul li a { display: block; width: 100%; clear: both; overflow: hidden }
-.toppic li p { color: #B5783E; padding-left: 110px; margin-top: 5px; background: url(../images/icons.png) no-repeat }
+.toppic li p { color: #B5783E; padding-left: 110px; margin-top: 5px; /*background: url(../images/icons.png) no-repeat*/ }
 .toppic li:first-child p { background-position: 90px -263px; }
 .toppic li:nth-child(2) p { background-position: 90px -283px; }
 .toppic li:last-child p { background-position: 90px -301px; }

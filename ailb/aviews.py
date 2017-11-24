@@ -19,8 +19,11 @@ def test(request):
 def index(request):
     indexServiceIns = indexService()
     techEssays = indexServiceIns.getEssayInfo(0,None)
+    toutiaoNewsList = indexServiceIns.getNewsInfo()
+    replyList = indexServiceIns.searchReply(-1)
+
     #用HttpResponse返回字符串
-    return render(request,'alib/index.html',{'techEssays':techEssays})
+    return render(request,'alib/index.html',{'techEssays':techEssays,'toutiaoNewsList':toutiaoNewsList,'replyList':replyList})
 
 
 #点赞
@@ -63,3 +66,7 @@ def replySubmit(request):
         return  HttpResponse('评论回复后台更新出错啦!')
 
 
+#查看小说列表
+def novel(request):
+    logging.info('查看小说列表')
+    return render(request,'alib/novel.html')

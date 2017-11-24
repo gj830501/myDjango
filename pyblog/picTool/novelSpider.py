@@ -11,9 +11,9 @@ from urllib.request import urlopen
 import os
 import re
 import random
-import chardet
-import zlib
 import json
+import gzip
+
 
 class novelSpider:
     jsList = []
@@ -26,19 +26,21 @@ class novelSpider:
 
     def catchPageContent(self):
         htmla = urllib.request.urlopen(self.url)
-        htmcont = htmla.read().decode('utf-8')
+        htmcont = htmla.read()
         print("========================")
         print(htmcont)
-        data = json.loads(htmcont)
-        newsList = data['data']
-        for news in newsList:
-            print(news)
+        file = open('E:/page.html', 'w')
+        file.write(str(htmcont))
+        file.close()
+        #data = json.loads(htmcont)
+        #newsList = data['data']
+       # for news in newsList:
+        #    print(news)
 
 
 
-
-    @staticmethod
-    def getContent(url):
+    def getContent(self):
+        url =self.url
         """
         此函数用于模拟浏览器访问的网页
         """
@@ -53,18 +55,24 @@ class novelSpider:
         req = urllib.request.Request(url)
         req.add_header('Accept', 'text/javascript, text/html, application/xml, text/xml, */*')
 
-        req.add_header('Accept-Encoding', 'gzip')
+       # req.add_header('Accept-Encoding', 'gzip')
         req.add_header("Accept-Languaget", 'zh-CN')
         req.add_header('Connection', 'keep-alive')
-        req.add_header('Cookie','tt_webid=6490058021534975501; uuid="w:2ab0c434e740430cb730692b57cf4c6b"; UM_distinctid=15fd3a7972337c-0a41b4de85bfc8-1c1f7d54-100200-15fd3a79724337; __tasessionId=r6d8e2t9k1511091592686; CNZZDATA1259612802=2107586991-1511081791-%7C1511087191')
+        req.add_header('Cookie','UM_distinctid=15febe6e431fd-0f461420153d85-6010107f-100200-15febe6e432440; CNZZDATA1259329227=1202118421-1511490102-%7C1511490102; Hm_lvt_1538a242553b02567eac96f751f59fa8=1511491301; Hm_lpvt_1538a242553b02567eac96f751f59fa8=1511491301')
         req.add_header("User-Agent", random_header)
         req.add_header("GET", url)
-        req.add_header("Host", "www.toutiao.com")
-        req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
+        req.add_header("Host", "qxs.la")
+        #req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
         print('====', req.headers)
-
-        content = urlopen(req).read()
+        content = urllib.request.urlopen(req).read()
+       # decompressed_data = zlib.decompress(res.read(), 16 + zlib.MAX_WBITS)
+        #print(*decompressed_data.decode('utf-8').splitlines(True)[:10])
         print(content)
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(content)
+        #print(soup.prettify())
+        print(soup.findAll('ul',{'class':'list_content'}))
+
 
     #查找JS源文件内容
     def downJs(self,jsUrl):
@@ -122,9 +130,7 @@ class novelSpider:
 
 
 if __name__=='__main__':
-    ns = novelSpider('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source='
-                     'toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
-    ns.catchPageContent()
-    #novelSpider.getContent('https://www.toutiao.com/api/pc/feed/?category=news_hot&utm_source=toutiao&widen=1&max_behot_time=0&max_behot_time_tmp=0&tadrequire=true&as=A1B5AAA1B136D93&cp=5A11960DC9C3BE1')
-
-
+    # http://qxs.la/dushi/
+    ns = novelSpider('http://qxs.la/dushi/')
+    #ns.catchPageContent()
+    ns.getContent()

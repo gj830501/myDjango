@@ -2,7 +2,7 @@ __author__ = 'Administrator'
 import urllib.request
 import json
 import random
-import string
+import logging
 #直接提取网页内容
 
 def catchPageContent(url):
@@ -32,7 +32,7 @@ def getContent(url):
     req = urllib.request.Request(url)
     req.add_header('Accept', 'text/javascript, text/html, application/xml, text/xml, */*')
 
-    req.add_header('Accept-Encoding', 'gzip')
+    #req.add_header('Accept-Encoding', 'gzip')
     req.add_header("Accept-Languaget", 'zh-CN')
     req.add_header('Connection', 'keep-alive')
     #req.add_header('Cookie',
@@ -42,7 +42,6 @@ def getContent(url):
     req.add_header("Host", "www.toutiao.com")
     req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
     htmcont =urllib.request.urlopen(req).read()
-    print(htmcont.decode())
     data = json.loads(htmcont)
     newsList = data['data']
     return newsList
@@ -65,13 +64,17 @@ def getToutiaoNews():
                             '1',
                             '2', '3', '4', '5', '6', '7', '8', '9'], 15))).replace(',', '')
 
-
-    contents = getContent(url%(param1,param2))
-    for news in contents:
-        print(news)
-
+    try:
+        contents = getContent(url%(param1,param2))
+    except Exception as e:
+        logging.error(e)
+        return []
+    return contents
 
 
 
 if __name__=='__main__':
-    getToutiaoNews()
+    contents = getToutiaoNews()
+    for news in contents:
+         if news.get('chinese_tag') is not None:
+             print(news)

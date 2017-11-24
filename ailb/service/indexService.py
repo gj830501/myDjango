@@ -6,6 +6,7 @@
 # @Desc  : 首页业务处理类
 from ailb import models
 import logging
+from pyblog.picTool.newSpider import getToutiaoNews
 from datetime import datetime
 
 class indexService(object):
@@ -53,7 +54,18 @@ class indexService(object):
 
     #查询评论回复信息
     def searchReply(self,essayId):
-        te = models.replyEssay.objects.filter(techEssay_id=essayId).order_by("-id")
+        if essayId == -1:
+            sql = '''
+                select * from (
+                select  r.id,essayTitle,r.replyDate,r.replyDetail,c.countnum ,r.techEssay_id from tb_replyessay r,tb_techessay t,
+                (select max(id) countnum from tb_replyessay ) c
+                where r.techEssay_id=t.id
+                order by -r.id ) b where b.id >b.countnum-3
+            '''
+            logging.info(sql)
+            te = models.replyEssay.objects.raw(sql)
+        else:
+            te = models.replyEssay.objects.filter(techEssay_id=essayId).order_by("-id")
         return  te
 
 
@@ -63,6 +75,16 @@ class indexService(object):
         rep = models.replyEssay(replyDetail=replyMes,techEssay=te)
         rep.save()
         return True
+
+    def getNewsInfo(self):
+        newsList = getToutiaoNews()
+        i = 0
+        for news in newsList:
+            if news.get('chinese_tag') is  None:
+                newsList.pop(i)
+            i +=1
+        return newsList
+
 
 
 
