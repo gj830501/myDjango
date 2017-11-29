@@ -1,0 +1,128 @@
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<title>小湾PYTHON</title>
+<meta name="keywords" content="python,照片整理,爬虫," />
+<meta name="description" content="随意小湾，学习交流" />
+    {% load staticfiles %}
+
+<link href="{% static 'ailb/css/styles.css'%}" rel="stylesheet">
+<link href="{% static 'ailb/css/view.css'%}" rel="stylesheet">
+    <link href="{% static 'ailb/css/novel.css'%}" rel="stylesheet">
+<!-- 返回顶部调用 begin -->
+<link href="{% static 'ailb/css/lrtk.css'%}" rel="stylesheet" />
+<script type="text/javascript" src="{% static 'ailb/js/jquery.js'%}"></script>
+<script src="{% static 'frtp/js/excanvas.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'ailb/js/js.js'%}"></script>
+<!-- 返回顶部调用 end-->
+
+</head>
+<body>
+<header>
+  <nav id="nav">
+    <ul>
+       <li><a href="/ailb/index" >HOME-PAGE</a></li>
+      <li><a href="/book/" target="_blank" title="湾小说">湾小说</a></li>
+      <li><a href="/jstt/" target="_blank" title="技术探讨">技术探讨</a></li>
+      <li><a href="/news/s/" target="_blank" title="慢生活">慢生活</a></li>
+      <li><a href="/newstalk/" target="_blank" title="爬虫新闻">爬虫新闻</a></li>
+      <li><a href="/news/jsex/" target="_blank" title="瞎搜">瞎搜</a></li>
+    </ul>
+    <script src="{% static 'ailb/js/silder.js'%}"></script><!--获取当前页导航 高亮显示标题-->
+  </nav>
+</header>
+<!--header end-->
+<div id="mainbody">
+  <div class="blogs">
+    <div id="index_view">
+      <h2 class="t_nav"><a href="/ailb/index/">网站首页</a><a href="/">湾小说</a></h2>
+
+      <!-- novel bg -->
+
+<div class="main">
+
+	<div class="meun">
+		<ul>
+
+			<li><a href="http://qxs.la">首页</a></li>
+			<li><a href="http://qxs.la/top/">点击榜</a></li>
+			<li><a href="http://qxs.la/qihuan/">奇幻</a></li>
+			<li><a href="http://qxs.la/xuanhuan/">玄幻</a></li>
+			<li><a href="http://qxs.la/yanqing/">言情</a></li>
+			<li><a href="http://qxs.la/dushi/">都市</a></li>
+			<li><a href="http://qxs.la/youxi/">游戏</a></li>
+			<li><a href="http://qxs.la/jingji/">竞技</a></li>
+			<li><a href="http://qxs.la/wuxia/">武侠</a></li>
+			<li><a href="http://qxs.la/lishi/">历史</a></li>
+			<li><a href="http://qxs.la/junshi/">军事</a></li>
+			<li><a href="http://qxs.la/kehuan/">科幻</a></li>
+			<li><a href="http://qxs.la/xianxia/">仙侠</a></li>
+			<li><a href="http://qxs.la/lingyi/">灵异</a></li>
+			<li><a href="http://qxs.la/nvxing/">女性</a></li>
+			<li><a href="http://qxs.la/qita/">其他</a></li>
+			<li><a href="http://qxs.la/last1.htm">最新更新</a></li>
+			<li><a href="http://qxs.la/new/">最新入库</a></li>
+		</ul>
+		<div class="queryForm">
+			<input id="search_key" onfocus="if(this.value='小说名字或作者')this.value=''" onkeydown="if(event.keyCode == 13) document.getElementById('search_but').click();" value="小说名字或作者">
+			<button id="search_but" type="button" onclick="window.location.href='/s_' + document.getElementById('search_key').value;">搜索</button>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="main list">
+	<div class="list_title">
+		<a href="http://qxs.la" class="sc">全小说</a>  &gt;
+		<a href="/dushi/">都市小说排行榜</a>
+	</div>
+	<ul class="list_head">
+		<li class="cc2">小说</li>
+		<li class="cc3">最新章节</li>
+		<li class="cc4">作者</li>
+		<li class="cc5">更新时间</li>
+	</ul>
+<!--
+	<ul class="list_content ">
+		<li class="cc2"><a href="/180323/">疯狂农场主</a></li>
+		<li class="cc3"><a href="/180323/30162389/">第443章 星辰大海（全文终）</a></li>
+		<li class="cc4"><a href="http://qxs.la/zuozhe/%B3%E62">虫2</a></li>
+		<li class="cc5">2016-11-26 15:18</li>
+	</ul>
+{% autoescape off %}
+     {{ nslist }}
+{% endautoescape %}
+ -->
+    {% for news in toutiaoNewsList %}
+    	<ul class="list_content ">
+            <li class="cc2"><a href="/180323/">{{ nslist }}</a></li>
+            <li class="cc3"><a href="/180323/30162389/">第443章 星辰大海（全文终）</a></li>
+            <li class="cc4"><a href="http://qxs.la/zuozhe/%B3%E62">虫2</a></li>
+            <li class="cc5">2016-11-26 15:18</li>
+	    </ul>
+    {% endfor %}
+
+	<div class="clear"></div>
+	<div id="pagenav"><a class="current">1</a><a href="/dushi/2/">2</a><a href="/dushi/3/">3</a><a href="/dushi/4/">4</a><a href="/dushi/5/">5</a><a href="/dushi/6/">6</a><a href="/dushi/7/">7</a><a href="/dushi/8/">8</a><a href="/dushi/9/">9</a><a href="/dushi/10/">10</a>
+	</div>
+</div>
+   <!-- novel bg -->
+ </div>
+  </div>
+
+    </div>
+
+
+
+
+<!--mainbody end-->
+<footer>
+  <div class="footer-bottom">
+    <p>Copyright 2017 Design by <a href="http://www.ailb.top">Eddie</a></p>
+  </div>
+</footer>
+</body>
+</html>
+<script>
+
+
+</script>
