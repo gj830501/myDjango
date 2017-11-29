@@ -7,8 +7,7 @@ from ailb.service.indexService import indexService
 import logging
 import simplejson
 from django.core import serializers
-import json
-from ailb.comm.jsonCover import ComplexEncoder
+from  ailb.service.NovelService import NovelService
 
 #测试用随后删除
 def test(request):
@@ -69,4 +68,7 @@ def replySubmit(request):
 #查看小说列表
 def novel(request):
     logging.info('查看小说列表')
-    return render(request,'alib/novel.html')
+    ns = NovelService()
+    nsHtml = ns.getNovelist()
+
+    return render(request,'alib/novel.html',{'nslist':nsHtml})

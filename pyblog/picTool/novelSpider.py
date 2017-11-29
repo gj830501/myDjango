@@ -63,15 +63,12 @@ class novelSpider:
         req.add_header("GET", url)
         req.add_header("Host", "qxs.la")
         #req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
-        print('====', req.headers)
         content = urllib.request.urlopen(req).read()
-       # decompressed_data = zlib.decompress(res.read(), 16 + zlib.MAX_WBITS)
-        #print(*decompressed_data.decode('utf-8').splitlines(True)[:10])
         print(content)
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(content)
         #print(soup.prettify())
-        print(soup.findAll('ul',{'class':'list_content'}))
+        return soup.findAll('ul',{'class':'list_content'})
 
 
     #查找JS源文件内容
@@ -133,4 +130,4 @@ if __name__=='__main__':
     # http://qxs.la/dushi/
     ns = novelSpider('http://qxs.la/dushi/')
     #ns.catchPageContent()
-    ns.getContent()
+    print(ns.getContent()[0])
