@@ -64,7 +64,7 @@ class novelSpider:
         req.add_header("Host", "qxs.la")
         #req.add_header("Referer", "https://www.toutiao.com/ch/news_hot/")
         content = urllib.request.urlopen(req).read()
-        print(content)
+        #print(content)
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(content)
         #print(soup.prettify())
@@ -130,4 +130,20 @@ if __name__=='__main__':
     # http://qxs.la/dushi/
     ns = novelSpider('http://qxs.la/dushi/')
     #ns.catchPageContent()
-    print(ns.getContent()[0])
+
+    str = ns.getContent()[0]
+    a = 1
+    for l in str.select('li'):
+        print(l)
+
+        if a > 3:
+            print(l.string)
+        else:
+            print(l.a.string)
+            print(l.a.get('href'))
+
+        a = a+1
+
+
+    #tempstr = str.replace('href=\"','target=\"_self\"  href=\"http://qxs.la/dushi')
+    #print(tempstr)

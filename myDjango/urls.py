@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^ailb/essayFavor/', aviews.essayFavor),
     url(r'^ailb/detail/id(\d+)/$', aviews.detail),
     url(r'^ailb/replySubmit/', aviews.replySubmit),
-    url(r'^ailb/novel/', aviews.novel),
+    url(r'^ailb/wangnovel/(\w+)/$', aviews.novel),
 
 
 ]

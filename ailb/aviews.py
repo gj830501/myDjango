@@ -66,9 +66,9 @@ def replySubmit(request):
 
 
 #查看小说列表
-def novel(request):
-    logging.info('查看小说列表')
-    ns = NovelService()
-    nsHtml = ns.getNovelist()
+def novel(request,novelType):
+    logging.info('查看小说列表'+novelType)
+    ns = NovelService(novelType)
+    novelInfoList = ns.getNovelist()
 
-    return render(request,'alib/novel.html',{'nslist':nsHtml})
+    return render(request,'alib/novel.html',{'nslist':novelInfoList})
